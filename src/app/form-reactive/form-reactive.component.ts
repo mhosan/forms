@@ -13,6 +13,7 @@ export class FormReactiveComponent {
   public edad:FormControl = new FormControl(0);
   public direccion:FormControl = new FormControl(''); */
   public contactForm: FormGroup = new FormGroup({
+    nombre: new FormControl(''),
     apellido: new FormControl(''),
     edad: new FormControl(0),
     direccion: new FormControl('')
