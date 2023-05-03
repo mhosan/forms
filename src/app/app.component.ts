@@ -7,8 +7,9 @@ import { Usuarios } from './models/usuarios';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  public usuarios: Usuarios[]=[];
   ngOnInit(): void {
-    const usuarios: Usuarios[] = [
+    this.usuarios = [
       {
         nombre: "Juan",
         apellido: "Perez",
@@ -33,6 +34,7 @@ export class AppComponent implements OnInit {
   public model: Usuarios ={nombre: '', apellido: '', edad: 0, direccion: ''};
   
   enviar(){
-    alert(JSON.stringify(this.model));
+    this.usuarios.push(this.model)
+    alert(JSON.stringify(this.usuarios));
   }
 }
