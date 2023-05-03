@@ -1,1 +1,7 @@
-<p>form-reactive works!</p>
+<label class="ms-4 mt-4" for="nombre">Nombre </label>
+<input class="ms-2 mt-4" type="text" id="nombre" [formControl]="nombre">
+
+<p class="ms-4 mt-4">{{nombre.value}}</p>
+<!-- ojo que esto funciona bien porque no está dentro de un formulario.-->
+<!-- cuando está dentro de un formulario, el formulario debe estar asociado  -->
+<!-- a un formGroup-->
