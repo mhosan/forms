@@ -10,16 +10,23 @@ el tag html se bindea con la clase declarando un objeto del tipo formControl en 
 <!-- cuando está dentro de un formulario, el formulario debe estar asociado  -->
 <!-- a un formGroup-->
 
-
 <form [formGroup]="contactForm" class="ms-5 me-5 mt-5" >
     <div class="form-group">
       <label for="nombre">Nombre</label>
-      <input type="text" class="form-control" id="nombre" formControlName="nombre" > <!-- cuando es un item de un formGroup, se usa formControlName y no [formControl] -->
+      <input type="text" class="form-control" id="nombre" formControlName="nombre" > 
     </div>
     <div class="form-group">
       <label for="apellido">Apellido</label>
       <input type="text" class="form-control" id="apellido" formControlName="apellido">
     </div>
+
+    <div class="form-group" formGroupName="phone">
+      <label for="type">Tipo</label>
+      <input type="text" class="form-control" id="type" formControlName="type">
+      <label for="number">Tipo</label>
+      <input type="text" class="form-control" id="number" formControlName="number">
+    </div>
+
     <div class="form-group">
       <label for="edad">Edad</label>
       <input type="text" class="form-control" id="edad" formControlName="edad">
