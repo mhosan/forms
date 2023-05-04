@@ -8,10 +8,17 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 export class FormReactiveComponent {
 
-  /* public nombre:FormControl = new FormControl('');
+  /* 
+  este bloque de codigo es usando directamente formControl. Se declara
+  un objeto del tipo formControl para engancharlo (binding) con el tag
+  de html: 
+
+  public nombre:FormControl = new FormControl('');
   public apellido:FormControl = new FormControl('');
   public edad:FormControl = new FormControl(0);
-  public direccion:FormControl = new FormControl(''); */
+  public direccion:FormControl = new FormControl(''); 
+  */
+ 
   public contactForm: FormGroup = new FormGroup({
     nombre: new FormControl(''),
     apellido: new FormControl(''),
