@@ -10,7 +10,7 @@ el tag html se bindea con la clase declarando un objeto del tipo formControl en 
 <!-- a un formGroup-->
 
 <form [formGroup]="contactForm" class="ms-5 me-5 mt-5">
-  
+
   <div class="form-group">
     <img [src]="contactForm.value.picture" alt="">
     <input type="file" accept=".png, .jpg, .jpeg" (change)=addImage($event) width="10">
@@ -19,17 +19,39 @@ el tag html se bindea con la clase declarando un objeto del tipo formControl en 
   <div class="form-group">
     <label for="nombre">Nombre</label>
     <input type="text" class="form-control" id="nombre" formControlName="nombre">
+    <ng-container *ngIf="!contactForm.get('nombre')?.valid">
+      <i>Este campo es requerido!</i>
+    </ng-container>
   </div>
+
   <div class="form-group">
     <label for="apellido">Apellido</label>
     <input type="text" class="form-control" id="apellido" formControlName="apellido">
+    <ng-container *ngIf="!apellido!.valid">
+      invalido
+      <p *ngIf="apellido?.errors?.['required']" class="error-message">
+        <i>Este campo es requerido!</i>
+      </p>
+      <p *ngIf="apellido?.errors?.['minlength']" class="error-message">
+        Este campo requiere al menos dos caracteres!!
+      </p>
+    </ng-container>
   </div>
 
   <div class="form-group" formGroupName="phone">
-    <label for="type">Tipo</label>
+
+    <label for="type">Tipo telef.</label>
     <input type="text" class="form-control" id="type" formControlName="type">
-    <label for="number">Número</label>
+    <ng-container *ngIf="!phoneForm.get('type')?.valid">
+      <i>Este campo es requerido!</i>
+    </ng-container>
+    <br>
+    <label for="number">Número telef.</label>
     <input type="text" class="form-control" id="number" formControlName="number">
+    <ng-container *ngIf="!phoneForm.get('number')?.valid">
+      <i>Este campo es requerido!</i>
+    </ng-container>
+
   </div>
 
   <div class="form-group">
@@ -41,7 +63,6 @@ el tag html se bindea con la clase declarando un objeto del tipo formControl en 
     <input type="text" class="form-control" id="direccion" formControlName="direccion">
   </div>
 
-  <button type="submit" class="btn btn-primary mt-3">Enviar</button>
+  <button type="submit" class="btn btn-primary mt-3" [disabled]="contactForm.invalid">Enviar</button>
+  <!-- <button type="submit" class="btn btn-primary mt-3">Enviar</button> -->
 </form>
-
-<pre>{{contactForm.value | json}}</pre>

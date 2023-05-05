@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-form-reactive',
@@ -20,22 +20,22 @@ export class FormReactiveComponent {
   */
 
   public contactForm: FormGroup = new FormGroup({
-    nombre: new FormControl(''),
+    nombre: new FormControl('', [Validators.required, Validators.minLength(2)]),
     picture: new FormControl(''),
-    apellido: new FormControl(''),
+    apellido: new FormControl('', [Validators.required, Validators.minLength(2)]),
     phone: new FormGroup({
-      type: new FormControl(''),
-      number: new FormControl('')
+      type: new FormControl('', [Validators.required]),
+      number: new FormControl('', [Validators.required])
     }),
     edad: new FormControl(0),
     direccion: new FormControl('')
   });
 
-  addImage(event:any){
+  addImage(event: any) {
     const file = event.target.files[0];
     var reader = new FileReader();
     reader.readAsDataURL(file);
-    reader.onload = (evt) =>{
+    reader.onload = (evt) => {
       //En un formulario por template se actualizaria directamente el tag del form con
       //el archivo de imagen leido, pero en forms reactivos no, ya que los estados en forms 
       //reactivos son inmutables. Y detectar un cambio en el form react es mas rapido y eficiente
@@ -52,5 +52,16 @@ export class FormReactiveComponent {
     };
   }
 
+  get apellido() {
+    return this.contactForm.get('apellido');
+  }
+
+  /*
+  cuando hay grupos anidados, como por ejemplo phone que está anidado dentro de contactForm, para poder
+  referenciarlos en el html, en las validaciones, hay que armar un getter como el siguiente:
+   */
+  get phoneForm() {
+    return this.contactForm.get('phone') as FormGroup;
+  }
 
 }
