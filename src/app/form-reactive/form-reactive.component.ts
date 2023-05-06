@@ -1,12 +1,26 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { filter, map, tap, zip } from 'rxjs';
 
 @Component({
   selector: 'app-form-reactive',
   templateUrl: './form-reactive.component.html',
   styleUrls: ['./form-reactive.component.css']
 })
-export class FormReactiveComponent {
+export class FormReactiveComponent implements OnInit{
+  ngOnInit(): void {
+    //zip combina eventos de varios observables, emite un nuevo valor en cada cambio del formulario en un array con
+    //el estado en la posicion 0 y el valor del formulario en la posicion 1.
+    //map se utiliza para transformar los valores de un flujo de observables en nuevos valores, mientras que la función
+    //tap se utiliza para realizar acciones secundarias con los valores de un flujo de observables sin modificarlos.  
+      zip(this.contactForm.statusChanges, this.contactForm.valueChanges).pipe(
+        filter(([state, value])=> state == 'VALID'),
+        map(([state, value])=> value),
+        tap(data =>{console.log(data)})
+      ).subscribe(formValue =>{
+        localStorage.setItem('contact', JSON.stringify(formValue));
+      });
+  }
 
   /* 
   este bloque de codigo es usando directamente formControl. Se declara
