@@ -21,7 +21,7 @@ export class FormReactiveComponent {
 
   public contactForm: FormGroup = new FormGroup({
     nombre: new FormControl('', [Validators.required, Validators.minLength(2)]),
-    picture: new FormControl(''),
+    picture: new FormControl('assets/dos.jpg'),
     apellido: new FormControl('', [Validators.required, Validators.minLength(2)]),
     phone: new FormGroup({
       type: new FormControl('', [Validators.required]),
@@ -33,6 +33,7 @@ export class FormReactiveComponent {
 
   addImage(event: any) {
     const file = event.target.files[0];
+    console.log(file);
     var reader = new FileReader();
     reader.readAsDataURL(file);
     reader.onload = (evt) => {
@@ -62,6 +63,13 @@ export class FormReactiveComponent {
    */
   get phoneForm() {
     return this.contactForm.get('phone') as FormGroup;
+  }
+
+  addItem(){
+    alert(JSON.stringify(this.contactForm.value));
+    this.contactForm.reset({
+      picture:'assets/dos.jpg'
+    });
   }
 
 }
