@@ -9,6 +9,10 @@ import { filter, map, tap, zip } from 'rxjs';
 })
 export class FormReactiveComponent implements OnInit{
   ngOnInit(): void {
+    const contact = localStorage.getItem('contact');
+    if(contact){
+      this.contactForm.setValue(JSON.parse(contact));
+    }
     //zip combina eventos de varios observables, emite un nuevo valor en cada cambio del formulario en un array con
     //el estado en la posicion 0 y el valor del formulario en la posicion 1.
     //map se utiliza para transformar los valores de un flujo de observables en nuevos valores, mientras que la función
