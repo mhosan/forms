@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Usuarios } from '../models/usuarios';
+import { Usuarios, ContactPhone, PhoneType } from '../models/usuarios';
 
 @Component({
   selector: 'app-form-template',
@@ -7,37 +7,43 @@ import { Usuarios } from '../models/usuarios';
   styleUrls: ['./form-template.component.css']
 })
 export class FormTemplateComponent implements OnInit {
-  
+  public usuarios: Usuarios[] = [];
+  //public contactPhone: ContactPhone ={type: PhoneType.mobile , number: 0} 
   ngOnInit(): void {
+    const contactPhone: ContactPhone = { type: PhoneType.mobile, number: 0 }
     this.usuarios = [
       {
         nombre: "Juan",
         apellido: "Perez",
         edad: 88,
-        direccion: "calle 1 nro. 23"
+        direccion: "calle 1 nro. 23",
+        phone: [{ type: PhoneType.home, number: 88 },
+        { type: PhoneType.mobile, number: 55 },
+        { type: PhoneType.work, number: 455 }
+        ]
+      },
+      {
+        nombre: "José",
+        apellido: "Martinez",
+        edad: 128,
+        direccion: "calle 44 nro. 500",
+        phone: [{ type: PhoneType.home, number: 65 }]
       },
       {
         nombre: "Carlos",
-        apellido: "Martinez",
-        edad: 33,
-        direccion: "calle 41 nro. 123"
-      },
-      {
-        nombre: "Pedro",
         apellido: "Lopez",
-        edad: 28,
-        direccion: "calle 13 nro. 233"
+        edad: 33,
+        direccion: "calle 72 nro. 57",
+        phone: [{ type: PhoneType.home, number: 345 }]
       }
     ];
   }
+  public model: Usuarios = { nombre: '', apellido: '', edad: 0, direccion: '', phone: [{ type: PhoneType.home, number: 0 }] };
 
-  public usuarios: Usuarios[]=[];
-  public model: Usuarios ={nombre: '', apellido: '', edad: 0, direccion: ''};
-  
-  enviar(){
+  enviar() {
     this.usuarios.push(this.model)
     alert(JSON.stringify(this.usuarios));
-    this.model = {nombre: '', apellido: '', edad: 0, direccion: ''};
-    
+    this.model = { nombre: '', apellido: '', edad: 0, direccion: '', phone: [{ type: PhoneType.home, number: 0 }] };
+
   }
 }
