@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { HourService } from '../services/hour.service';
 import { filter, map, tap, zip } from 'rxjs';
 
 @Component({
@@ -8,6 +9,8 @@ import { filter, map, tap, zip } from 'rxjs';
   styleUrls: ['./form-reactive.component.css']
 })
 export class FormReactiveComponent implements OnInit{
+  constructor(private hourService: HourService ){}
+  
   ngOnInit(): void {
     const contact = localStorage.getItem('contact');
     if(contact){
